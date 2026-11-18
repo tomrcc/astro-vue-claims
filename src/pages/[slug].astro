@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import TagsRaw from "../components/TagsRaw.vue";
+import TagsSfc from "../components/TagsSfc.vue";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { check, tags, title } = page.data;
+---
+
+<Base title={title}>
+  <h1 data-editable="text" data-type="span" data-prop="title">{title}</h1>
+  {check === "raw-static" && <TagsRaw tags={tags} />}
+  {check === "sfc-static" && <TagsSfc tags={tags} />}
+  {check === "raw-hydrated" && <TagsRaw tags={tags} client:load />}
+  {check === "sfc-hydrated" && <TagsSfc tags={tags} client:load />}
+</Base>

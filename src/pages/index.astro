@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+
+const pages = await getCollection("pages");
+---
+
+<Base title="Astro + Vue claim checks">
+  <h1>Astro + Vue claim checks</h1>
+  <ul>
+    {pages.map((page) => <li><a href={`/${page.id}/`}>{page.data.title}</a></li>)}
+  </ul>
+</Base>

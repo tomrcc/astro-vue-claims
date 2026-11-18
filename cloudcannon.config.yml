@@ -1,0 +1,11 @@
+paths:
+  static: public
+  uploads: public/uploads
+timezone: Pacific/Auckland
+collections_config:
+  pages:
+    path: src/content/pages
+    url: /[slug]/
+    disable_add: true
+    _enabled_editors:
+      - visual
